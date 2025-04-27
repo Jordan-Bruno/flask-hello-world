@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask Basics Walkthrough</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="bg-light text-dark">
+    <div id="themeToggleContainer">
+      <button id="themeToggle" class="btn btn-outline-primary">
+        <i id="themeIcon" class="fas fa-sun"></i>
+      </button>
+    </div>
+
+    <header class="container my-5">
+      <h1>Flask Basics Walkthrough</h1>
+      <p class="author-text">
+        By
+        <a
+          href="https://github.com/Jordan-Bruno"
+          target="_blank"
+          class="text-primary"
+          >Jordan Bruno</a
+        >
+      </p>
+      <p class="lead">
+        Step-by-step guide to building your first Flask app. Follow carefully
+        and copy the code into your editor as we go!
+      </p>
+      <hr />
+    </header>
+
+    <main>
+      <!-- Step 1 -->
+      <section class="container my-4">
+        <article class="tutorial-step">
+          <h2>Step 1: Create a Basic Flask App</h2>
+          <p>
+            We start by building a tiny web server. This app will show "Hello,
+            World!" when we visit the homepage. Every part of this code is
+            important to make the app work correctly.
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="step1">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="step1" class="code-block">
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return 'Hello, World!'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+            </textarea>
+          </div>
+          <p>
+            <strong>Explanation:</strong> We import Flask, create our app,
+            create one route (page), and run the app if this file is opened
+            directly.
+          </p>
+        </article>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="container my-4">
+        <article class="tutorial-step">
+          <h2>Step 2: Add Another Route</h2>
+          <p>
+            Most websites have many pages. Let's add an About page by creating
+            another route in our app.
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="step2">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="step2" class="code-block">
+@app.route('/about')
+def about():
+    return 'This is the about page.'
+            </textarea>
+          </div>
+          <p>
+            <strong>Explanation:</strong> Now when you visit
+            <code>/about</code> in your browser, this new page will show a
+            simple message.
+          </p>
+        </article>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="container my-4">
+        <article class="tutorial-step">
+          <h2>Step 3: Return HTML from a Route</h2>
+          <p>
+            Instead of sending plain text, we can return proper HTML. HTML
+            allows us to make the content look nicer.
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="step3">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="step3" class="code-block">
+@app.route('/html')
+def html_page():
+    return '<h1>Hello with HTML!</h1><p>This is a paragraph with HTML tags.</p>'
+            </textarea>
+          </div>
+          <p>
+            <strong>Explanation:</strong> The browser understands this HTML and
+            formats it properly with a heading and paragraph.
+          </p>
+        </article>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="container my-4">
+        <article class="tutorial-step">
+          <h2>Step 4: Update Import to Use Templates</h2>
+          <p>
+            It is messy to write HTML inside Python. Flask lets us store HTML
+            files separately using templates. First, update your import to allow
+            template rendering.
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="step4_1">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="step4_1" class="code-block">
+from flask import Flask, render_template
+            </textarea>
+          </div>
+          <p>
+            <strong>Explanation:</strong> Adding
+            <code>render_template</code> allows Flask to find and load real HTML
+            files saved in a folder called <code>templates</code>.
+          </p>
+        </article>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="container my-4">
+        <article class="tutorial-step">
+          <h2>Step 5: Create and Render an HTML File</h2>
+          <p>
+            Make a new folder named <strong>templates</strong>. Inside it,
+            create a file called <strong>index.html</strong> with this code:
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="indexhtml">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="indexhtml" class="code-block">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome to the Home Page!</h1>
+    <p>This page is from a real HTML file.</p>
+</body>
+</html>
+            </textarea>
+          </div>
+          <p>
+            Now update the home route to show this template instead of plain
+            text:
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="step4_2">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="step4_2" class="code-block">
+@app.route('/')
+def home():
+    return render_template('index.html')
+            </textarea>
+          </div>
+          <p>
+            <strong>Explanation:</strong> Flask now loads a real HTML file when
+            someone visits the homepage. Easier to manage and more professional.
+          </p>
+        </article>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="container my-4">
+        <article class="tutorial-step">
+          <h2>Step 6: Create a Dynamic URL (Variable Rules)</h2>
+          <p>
+            Sometimes the page should change based on what the user types in the
+            address bar. Flask lets us create dynamic routes using variables.
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="step5">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="step5" class="code-block">
+@app.route('/user/<name>')
+def user(name):
+    return f'Hello, {name}!'
+            </textarea>
+          </div>
+          <p>
+            <strong>Explanation:</strong> If someone visits
+            <code>/user/Jordan</code> it will say "Hello, Jordan!". Flask picks
+            up the name from the URL automatically.
+          </p>
+        </article>
+      </section>
+
+      <!-- Step 7 -->
+      <section class="container my-4">
+        <article class="tutorial-step">
+          <h2>Step 7: Set Variable Type in URL</h2>
+          <p>
+            We can make variables stricter by setting a type. For example, only
+            allow numbers in the URL.
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="step6">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="step6" class="code-block">
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    return f'Post ID is {post_id}'
+            </textarea>
+          </div>
+          <p>
+            <strong>Explanation:</strong> If you visit <code>/post/5</code> it
+            will show "Post ID is 5". If you type text instead of a number, it
+            won't match the route.
+          </p>
+        </article>
+      </section>
+
+      <!-- Step 8 -->
+      <section class="container my-4">
+        <article class="tutorial-step">
+          <h2>Step 8: Use a Template with Dynamic Content</h2>
+          <p>
+            Let's make the <code>/user/&lt;name&gt;</code> route even better by
+            using a real HTML page and showing the user's name inside it.
+          </p>
+          <p>
+            Create a new file inside the <strong>templates</strong> folder
+            called <strong>user.html</strong>:
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="userhtml">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="userhtml" class="code-block">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Page</title>
+</head>
+<body>
+    <h1>{{ name }} says hello!</h1>
+</body>
+</html>
+            </textarea>
+          </div>
+          <p>
+            Now update the <code>/user/&lt;name&gt;</code> route to render this
+            template instead of returning a string:
+          </p>
+          <div class="code-container">
+            <button class="copy-btn" data-target="step7">
+              <i class="fas fa-copy"></i>
+            </button>
+            <textarea readonly id="step7" class="code-block">
+@app.route('/user/<name>')
+def user(name):
+    return render_template('user.html', name=name)
+            </textarea>
+          </div>
+          <p>
+            <strong>Explanation:</strong> Inside the
+            <strong>user.html</strong> page, <code>{{ name }}</code> is a
+            placeholder. Flask replaces it with the real name from the URL.
+          </p>
+          <p>
+            <strong>Extra Note:</strong> The <code>{{ name }}</code> syntax is
+            part of something called <strong>Jinja2</strong>. Jinja2 is a
+            template language that lets us insert Python-like code inside our
+            HTML. We will learn more about it later, but for now just know that
+            it allows variables, loops, and logic inside HTML templates.
+          </p>
+        </article>
+      </section>
+
+      <section class="container text-center my-5">
+        <p>
+          You can find the <strong>full/completed code</strong> for this
+          tutorial at
+          <a
+            href="https://github.com/Jordan-Bruno/flask-hello-world"
+            target="_blank"
+            class="text-primary"
+          >
+            this GitHub file </a
+          >.
+        </p>
+        <hr />
+      </section>
+    </main>
+
+    <footer class="container text-center my-5">
+      <p>
+        This tutorial is part of the
+        <strong>Digital Development Module</strong>. The code examples were
+        written by <strong>Jordan Bruno</strong>.
+      </p>
+      <p>
+        Visit additional module content on
+        <a
+          href="https://github.com/Jordan-Bruno"
+          target="_blank"
+          class="text-primary"
+          >GitHub</a
+        >.
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
