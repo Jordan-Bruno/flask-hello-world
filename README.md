@@ -1,6 +1,6 @@
 # Flask Hello World Walkthrough
 
-> [View Tutorial](TODO)
+> [View Tutorial](https://jordan-bruno.github.io/flask-hello-world/)
 
 This repository contains a beginner-friendly Flask project designed to introduce students to the basics of building a simple web application. It walks through key concepts such as:
 
@@ -47,7 +47,7 @@ The content is presented as an interactive, notebook-style walkthrough and concl
 
 The easiest way to view this tutorial is by visiting the live webpage:
 
-👉 [todo](todo)
+👉 [https://jordan-bruno.github.io/flask-hello-world/](https://jordan-bruno.github.io/flask-hello-world/)
 
 If you prefer to run it locally:
 
